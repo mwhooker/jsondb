@@ -47,3 +47,8 @@ class TestJsonDB(TestCase):
 
     def test_json(self):
         self.assertTrue(len(json.dumps(self.fixture)) > 0)
+
+    def test_contains(self):
+
+        self.assertTrue('a/z' in self.fixture)
+        self.assertTrue('a/b/c' in self.fixture)

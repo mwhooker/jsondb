@@ -37,9 +37,11 @@ class JsonDbHandler(tornado.web.RequestHandler):
 
 
     def get(self, path, **kwargs):
-        try:
+        if not len(path):
+            data = store
+        elif path in store:
             data = store[path]
-        except KeyError, e:
+        else:
             self.abort(404)
         self.write(data)
 

@@ -30,3 +30,13 @@ class JsonDB(dict):
                 dict.__delitem__(curr, node)
                 break
             curr = dict.__getitem__(curr, node)
+
+    def __contains__(self, path):
+        curr = self
+        parts = path.split('/')
+        for i, node in enumerate(parts):
+            if i + 1 == len(parts):
+                return dict.__contains__(curr, node)
+                break
+            curr = dict.__getitem__(curr, node)
+        return False
