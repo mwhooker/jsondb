@@ -1,0 +1,48 @@
+# Creating new node
+# request
+POST /root/leaf
+{'foo': 'bar'}
+
+# response
+Status: 201
+{'link': '/root/leaf'}
+
+
+# Getting node representation
+# request
+GET /root/leaf
+ACCEPT: application/json
+
+# response
+{'foo': 'bar'}
+
+
+# Example
+# request = +
+# response = -
+
++GET /people
+-404
+
++POST /people/matthew
+-201
+-{'people': 
+-    'matthew': {
+-    }
+-}
+# returns created data with path from root
+
+
++POST /people
++{'matthew': {}}
+-201
+-'matthew': {
+-}
+# returns only created node
+
+# are equivilent
+
++GET /people
+-200
+-{'matthew': {}}
+
