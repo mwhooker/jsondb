@@ -2,11 +2,16 @@ import tornado.ioloop
 import tornado.web
 from jsondb import JsonDB
 
-store = JsonDB()
+store = JsonDB({'test': {'foo': 'bar'}})
 
 class JsonDbHandler(tornado.web.RequestHandler):
-    def get(self, path):
-        self.write(store.from_path(path))
+    def get(self, path, **kwargs):
+        try:
+            data = store[path]
+        except KeyError, e:
+            self.send_error(404)
+        self.set_header('Content-type', 'application/json')
+        self.write(data)
 
     def post(self, path):
         pass
