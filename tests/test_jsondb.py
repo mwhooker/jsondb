@@ -32,6 +32,11 @@ class TestJsonDB(TestCase):
         self.fixture[path] = 2
         self.assertEqual(self.fixture[path], 2)
 
+    def test_delitem(self):
+        path = 'a/z'
+        del self.fixture[path]
+        self.assertEqual(self.fixture, {'a': {'b': {'c': 2}}})
+
     def test_graft(self):
 
         fixture = JsonDB()
@@ -39,7 +44,6 @@ class TestJsonDB(TestCase):
         data = {'z': 1, 'b': {'c': 2}}
         fixture['a'] = data
         self.assertEqual(fixture['a'], data)
-
 
     def test_json(self):
         self.assertTrue(len(json.dumps(self.fixture)) > 0)

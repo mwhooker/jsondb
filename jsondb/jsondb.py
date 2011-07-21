@@ -23,4 +23,10 @@ class JsonDB(dict):
             curr = dict.__getitem__(curr, node)
 
     def __delitem__(self, path):
-        pass
+        curr = self
+        parts = path.split('/')
+        for i, node in enumerate(parts):
+            if i + 1 == len(parts):
+                dict.__delitem__(curr, node)
+                break
+            curr = dict.__getitem__(curr, node)
