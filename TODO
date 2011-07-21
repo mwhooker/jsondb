@@ -1,1 +1,2 @@
-http://drfloob.com/wiki/erlang_mochiweb_walkthrough.html
+1. implement PUT
+2. decide on how to handle JSON literals and arrays
