@@ -1,38 +1,26 @@
 from collections import MutableMapping
 
-class JsonDB(MutableMapping):
+class JsonDB(dict):
 
     def __init__(self, data=None):
         if isinstance(data, MutableMapping):
-            self.root = dict(data)
-        else:
-            self.root = {}
+            self.update(dict(data))
 
     def __getitem__(self, path):
-        curr = self.root
-        print "getitem_curr: %s" % self.root
+        curr = self
         for node in path.split('/'):
-            curr = curr[node]
+            curr = dict.__getitem__(curr, node)
         return curr
 
     def __setitem__(self, path, value):
-        curr = self.root
+        curr = self
         parts = path.split('/')
         for i, node in enumerate(parts):
             if i + 1 == len(parts):
-                curr[node] = value
+                dict.__setitem__(curr, node, value)
             if node not in curr:
-                curr[node] = {}
-            curr = curr[node]
+                dict.__setitem__(curr, node, {})
+            curr = dict.__getitem__(curr, node)
 
     def __delitem__(self, path):
-        del self.root[path]
-
-    def __iter__(self):
-        return self.root.__iter__()
-
-    def __len__(self):
-        return self.root.__len__()
-    
-    def __repr__(self):
-        return repr(self.root)
+        pass

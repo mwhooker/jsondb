@@ -1,3 +1,4 @@
+import json
 from unittest import TestCase
 from jsondb import JsonDB
 
@@ -37,5 +38,8 @@ class TestJsonDB(TestCase):
 
         data = {'z': 1, 'b': {'c': 2}}
         fixture['a'] = data
-        print fixture
         self.assertEqual(fixture['a'], data)
+
+
+    def test_json(self):
+        self.assertTrue(len(json.dumps(self.fixture)) > 0)
