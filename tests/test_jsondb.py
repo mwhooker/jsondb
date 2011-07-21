@@ -12,7 +12,7 @@ class TestJsonDB(TestCase):
         path = 'a/z'
         self.assertEqual(self.fixture[path], 1)
 
-        path = 'a/b/c'
+        path = 'a/b/c/'
         self.assertEqual(self.fixture[path], 2)
 
         path = 'a/b'

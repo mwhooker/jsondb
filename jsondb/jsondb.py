@@ -8,13 +8,13 @@ class JsonDB(dict):
 
     def __getitem__(self, path):
         curr = self
-        for node in path.split('/'):
+        for node in path.strip('/').split('/'):
             curr = dict.__getitem__(curr, node)
         return curr
 
     def __setitem__(self, path, value):
         curr = self
-        parts = path.split('/')
+        parts = path.strip('/').split('/')
         for i, node in enumerate(parts):
             if i + 1 == len(parts):
                 dict.__setitem__(curr, node, value)
@@ -24,7 +24,7 @@ class JsonDB(dict):
 
     def __delitem__(self, path):
         curr = self
-        parts = path.split('/')
+        parts = path.strip('/').split('/')
         for i, node in enumerate(parts):
             if i + 1 == len(parts):
                 dict.__delitem__(curr, node)
@@ -33,7 +33,7 @@ class JsonDB(dict):
 
     def __contains__(self, path):
         curr = self
-        parts = path.split('/')
+        parts = path.strip('/').split('/')
         for i, node in enumerate(parts):
             if i + 1 == len(parts):
                 return dict.__contains__(curr, node)
