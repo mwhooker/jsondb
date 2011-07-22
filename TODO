@@ -1,2 +1,6 @@
 1. implement PUT
 2. decide on how to handle JSON literals and arrays
+jsonselect
+    - /search?q=<select>
+versions
+    Mimetypes?
